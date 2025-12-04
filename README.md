@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Novalistic.ai Website
 
 A professional, modern website for Novalistic.ai - showcasing AI chatbots and automation solutions.
@@ -112,3 +113,7 @@ Simply upload all files to your hosting provider.
 ---
 
 **Built with ❤️ for Novalistic.ai - Shaping Tomorrow with AI**
+=======
+# novalistic-website
+Novalistic.ai website
+>>>>>>> c2b318b6010211048a230dfc1c68742da76d47f8
