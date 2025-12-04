@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novalistic.ai - Shaping Tomorrow with AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="logo.png" alt="Novalistic.ai Logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="cta-button">Get Started</button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div style="position: relative; display: inline-block;">
+                        <h1 class="hero-title">
+                            <span class="gradient-text">Shaping Tomorrow</span><br>
+                            with AI Automation
+                        </h1>
+                        <div class="title-floating-keywords">
+                            <div class="title-keyword" style="top: 0px; right: -580px;">Conversational AI</div>
+                            <div class="title-keyword" style="top: 50px; right: -595px;">Instant Replies</div>
+                            <div class="title-keyword" style="top: 100px; right: -565px;">Human-Like Interaction</div>
+                            <div class="title-keyword" style="top: 150px; right: -590px;">Voice & Text</div>
+                            <div class="title-keyword" style="top: 200px; right: -575px;">Sentiment Analysis</div>
+                            <div class="title-keyword" style="top: 250px; right: -600px;">Predictive AI</div>
+                            <div class="title-keyword" style="top: 300px; right: -570px;">Lead Generation</div>
+                            <div class="title-keyword" style="top: 350px; right: -585px;">Auto-Learning</div>
+                            <div class="title-keyword" style="top: 400px; right: -595px;">Smart Assistant</div>
+                            <div class="title-keyword" style="top: 450px; right: -565px;">Data-Driven Insights</div>
+                            <div class="title-keyword" style="top: 500px; right: -580px;">Multi-Language Support</div>
+                            <div class="title-keyword" style="top: 550px; right: -590px;">Automated Workflows</div>
+                            <div class="title-keyword" style="top: 600px; right: -575px;">NLP Technology</div>
+                            <div class="title-keyword" style="top: 650px; right: -595px;">Cost Optimization</div>
+                            <div class="title-keyword" style="top: 700px; right: -585px;">Scalable Solutions</div>
+                        </div>
+                    </div>
+                    <p class="hero-subtitle">
+                        Transform your business with intelligent chatbots and cutting-edge AI automation solutions. 
+                        Increase efficiency, reduce costs, and deliver exceptional customer experiences. 
+                        <span class="ai-chat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary">Start Your Journey</button>
+                        <button class="btn-secondary">Watch Demo</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <h3>🚀 10min</h3>
+                            <p>Setup Time</p>
+                        </div>
+                        <div class="stat">
+                            <h3>⚡ <1sec</h3>
+                            <p>Response Time</p>
+                        </div>
+                        <div class="stat">
+                            <h3>🌍 24/7</h3>
+                            <p>Always Online</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-illustration">
+                        <div class="chat-interface">
+                            <div class="chat-bubble user-bubble">
+                                <div class="typing-indicator">
+                                    <span>Hello!<br>How can AI help my business?</span>
+                                </div>
+                            </div>
+                            <div class="chat-bubble ai-bubble">
+                                <div class="ai-avatar">
+                                    <div class="ai-pulse"></div>
+                                </div>
+                                <div class="message-content">
+                                    <div class="typing-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <div class="ai-response">
+                                        I can transform your business in multiple ways!<br><br>
+                                        • Handle customer inquiries 24/7 without hiring extra staff, while instantly answering questions about products, services, and pricing.<br><br>
+                                        • Schedule appointments automatically and process orders with real-time shipment tracking.<br><br>
+                                        • Qualify leads before they reach your sales team, provide personalized product recommendations, and send automated follow-ups.<br><br>
+                                        • Analyze customer sentiment across conversations and handle multiple languages seamlessly.<br><br>
+                                        Think of me as your tireless digital employee — I never sleep, never take breaks, and get smarter with every conversation. Whether it's answering "What are your business hours?" at 3 AM or helping customers troubleshoot issues in real time, I've got you covered.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="data-particles">
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                                <div class="particle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-gradient"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our <span class="gradient-text">Services</span></h2>
+                <p class="section-subtitle">Comprehensive AI solutions tailored to your business needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card featured scroll-animate">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>AI Chatbots 🤖</h3>
+                    <p>Custom-built intelligent chatbots that understand context, learn from interactions, and provide human-like customer support 24/7.</p>
+                    <ul class="service-features">
+                        <li>Natural Language Processing</li>
+                        <li>Multi-language Support</li>
+                        <li>Seamless Integration</li>
+                    </ul>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Workflow Automation&nbsp;⚡</h3>
+                    <p>Automate repetitive tasks, streamline operations, and boost productivity with our intelligent automation solutions.</p>
+                    <ul class="service-features">
+                        <li>Custom Workflows</li>
+                        <li>API Integrations</li>
+                        <li>Real-time Monitoring</li>
+                    </ul>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Analytics & Insights 📊</h3>
+                    <p>Leverage AI-powered analytics to gain deep insights into customer behavior, operational efficiency, and business growth.</p>
+                    <ul class="service-features">
+                        <li>Predictive Analytics</li>
+                        <li>Custom Dashboards</li>
+                        <li>Performance Metrics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Simple, <span class="gradient-text">Transparent Pricing</span></h2>
+                <p class="section-subtitle">Choose the perfect plan for your business needs</p>
+                <div class="trial-benefits">
+                    <span class="trial-item">✓ 15-day free trial</span>
+                    <span class="trial-item">✓ No credit card required</span>
+                    <span class="trial-item">✓ No software to install</span>
+                </div>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card scroll-animate-scale">
+                    <h3 class="plan-name">Starter</h3>
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount">99</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="plan-description">Perfect for small businesses wanting a simple 24/7 assistant 💬<br><span style="font-size: 13px; color: var(--text-secondary);">+ $50 one-time setup</span></p>
+                    <ul class="plan-features">
+                        <li>✓ Website chatbot installation</li>
+                        <li>✓ Answers FAQs instantly</li>
+                        <li>✓ Business info (hours, pricing, location)</li>
+                        <li>✓ 24/7 availability</li>
+                        <li>✓ Up to 1,000 conversations/month</li>
+                        <li>✓ Basic analytics dashboard</li>
+                        <li>✓ Email support</li>
+                    </ul>
+                    <button class="plan-button">Get Started</button>
+                </div>
+                <div class="pricing-card popular scroll-animate-scale">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3 class="plan-name">Growth</h3>
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount">249</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="plan-description">For businesses needing automation and smart task handling 🚀<br><span style="font-size: 13px; color: var(--text-secondary);">+ $150 one-time setup</span></p>
+                    <ul class="plan-features">
+                        <li>✓ Everything in Starter, plus:</li>
+                        <li>✓ Appointment scheduling & booking</li>
+                        <li>✓ Order tracking & delivery updates</li>
+                        <li>✓ Automated follow-up messages</li>
+                        <li>✓ Multi-platform (Instagram, Facebook, WhatsApp)</li>
+                        <li>✓ AI Voice Bot for call answering</li>
+                        <li>✓ Customer data collection & storage</li>
+                        <li>✓ Basic e-commerce checkout support</li>
+                        <li>✓ Up to 5,000 conversations/month</li>
+                        <li>✓ Priority support & advanced analytics</li>
+                    </ul>
+                    <button class="plan-button">Get Started</button>
+                </div>
+                <div class="pricing-card scroll-animate-scale">
+                    <h3 class="plan-name">Enterprise</h3>
+                    <div class="plan-price">
+                        <span class="amount">Custom</span>
+                    </div>
+                    <p class="plan-description">Complete AI-driven digital employee team for your business 🏢</p>
+                    <ul class="plan-features">
+                        <li>✓ Everything in Growth, plus:</li>
+                        <li>✓ Fully custom AI agents</li>
+                        <li>✓ Advanced e-commerce shopping assistant</li>
+                        <li>✓ PDF & knowledge base AI training</li>
+                        <li>✓ Advanced technical support bot</li>
+                        <li>✓ Smart AI Voice Bot with call routing</li>
+                        <li>✓ CRM integrations (HubSpot, Salesforce, Zoho)</li>
+                        <li>✓ Multilingual support (English, Spanish, Turkish)</li>
+                        <li>✓ Customer behavior insights & analytics</li>
+                        <li>✓ Unlimited conversations & platforms</li>
+                        <li>✓ 24/7 dedicated support & SLA guarantee</li>
+                        <li>✓ White-label & on-premise options</li>
+                    </ul>
+                    <button class="plan-button">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose <span class="gradient-text">Novalistic.ai</span></h2>
+                <p class="section-subtitle">Cutting-edge technology meets exceptional service</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Deploy AI solutions in days, not months. Get up and running quickly with our streamlined onboarding process.</p>
+                </div>
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Enterprise Security</h3>
+                    <p>Bank-level encryption and compliance with international data protection standards keep your data safe.</p>
+                </div>
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Customizable</h3>
+                    <p>Fully tailored solutions that adapt to your unique business requirements and workflows.</p>
+                </div>
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">💡</div>
+                    <h3>Smart Learning</h3>
+                    <p>AI that continuously learns and improves from every interaction, becoming smarter over time.</p>
+                </div>
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Global Scale</h3>
+                    <p>Handle millions of interactions across multiple channels and languages simultaneously.</p>
+                </div>
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">📈</div>
+                    <h3>ROI Focused</h3>
+                    <p>Measurable results with average cost savings of 60% and customer satisfaction increase of 40%.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info scroll-animate-left">
+                    <h2>Let's Build Something <span class="gradient-text">Amazing Together</span></h2>
+                    <p>Ready to transform your business with AI? Get in touch with our team of experts today.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@novalistic.ai</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+1-706-714-5143</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Office</h4>
+                                <p>5540 Centerview Dr 204 337866<br>Raleigh, NC 27606</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper scroll-animate-right">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Company Name">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Tell us about your project" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="bottom logo.png" alt="Novalistic.ai Logo" class="footer-logo">
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Novalistic.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

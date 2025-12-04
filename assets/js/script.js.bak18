@@ -1,0 +1,475 @@
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Navbar scroll effect
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+        navbar.style.boxShadow = 'none';
+    } else {
+        navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.3)';
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Mobile menu toggle
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+    });
+}
+
+// Form submission handler
+const contactForm = document.querySelector('.contact-form');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        
+        // Show success message (you can replace this with actual form submission)
+        alert('Thank you for your message! We will get back to you soon.');
+        
+        // Reset form
+        contactForm.reset();
+    });
+}
+
+// Smooth scroll animation on reveal
+const scrollAnimationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            // Optional: stop observing after animation
+            scrollAnimationObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+});
+
+// Observe all elements with scroll animation classes
+document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale').forEach(el => {
+    scrollAnimationObserver.observe(el);
+});
+
+// Add animation to section headers as well
+document.querySelectorAll('.section-header').forEach(el => {
+    el.classList.add('scroll-animate');
+    scrollAnimationObserver.observe(el);
+});
+
+// CTA button click handlers
+document.querySelectorAll('.cta-button, .btn-primary, .plan-button').forEach(button => {
+    button.addEventListener('click', (e) => {
+        if (button.textContent.includes('Contact') || button.textContent.includes('Started')) {
+            e.preventDefault();
+            document.querySelector('#contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Add parallax effect to hero section
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroGradient = document.querySelector('.hero-gradient');
+    
+    if (heroGradient) {
+        heroGradient.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
+
+// Animate numbers in stats
+function animateNumber(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, 16);
+}
+
+// Trigger number animation when stats section is visible
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const stats = entry.target.querySelectorAll('.stat h3');
+            stats.forEach((stat, index) => {
+                const text = stat.textContent;
+                if (text.includes('+')) {
+                    const num = parseInt(text);
+                    animateNumber(stat, num, 2000);
+                    setTimeout(() => {
+                        stat.textContent = num + '+';
+                    }, 2000);
+                }
+            });
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) {
+    statsObserver.observe(heroStats);
+}
+
+// Add parallax effect to sections as you scroll
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            
+            // Parallax effect on hero
+            const heroGradient = document.querySelector('.hero-gradient');
+            if (heroGradient) {
+                heroGradient.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+            
+            // Subtle parallax on service cards
+            document.querySelectorAll('.service-card').forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const offset = (window.innerHeight - rect.top) * 0.05;
+                    card.style.transform = `translateY(${offset}px)`;
+                }
+            });
+            
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+console.log('Novalistic.ai website loaded successfully! 🚀');
+
+// Add sparkle effect to badges
+document.addEventListener('DOMContentLoaded', function() {
+    const badges = document.querySelectorAll('.badge');
+    
+    badges.forEach(badge => {
+        let sparkleInterval;
+        
+        badge.addEventListener('mouseenter', function() {
+            // Create sparkles continuously
+            sparkleInterval = setInterval(() => {
+                createSparkle(badge);
+            }, 150);
+        });
+        
+        badge.addEventListener('mouseleave', function() {
+            clearInterval(sparkleInterval);
+        });
+    });
+    
+    function createSparkle(badge) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle-particle';
+        
+        // Random size: small (3px), medium (5px), or large (7px)
+        const sizes = [3, 4, 5, 6, 7];
+        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        
+        // Random position within the badge
+        const rect = badge.getBoundingClientRect();
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        
+        sparkle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: white;
+            border-radius: 50%;
+            left: ${x}%;
+            top: ${y}%;
+            pointer-events: none;
+            z-index: 10;
+            box-shadow: 0 0 ${size * 2}px rgba(255, 255, 255, 0.8);
+            animation: sparkleRise 1s ease-out forwards;
+        `;
+        
+        badge.appendChild(sparkle);
+        
+        // Remove sparkle after animation
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1000);
+    }
+});
+
+// Override createSparkle with horizontal movement
+document.addEventListener('DOMContentLoaded', function() {
+    const badges = document.querySelectorAll('.badge');
+    
+    badges.forEach(badge => {
+        let sparkleInterval;
+        
+        badge.addEventListener('mouseenter', function() {
+            sparkleInterval = setInterval(() => {
+                createSparkleHorizontal(badge);
+            }, 120);
+        });
+        
+        badge.addEventListener('mouseleave', function() {
+            clearInterval(sparkleInterval);
+        });
+    });
+    
+    function createSparkleHorizontal(badge) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle-particle';
+        
+        const sizes = [3, 4, 5, 6, 7];
+        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        
+        // Random direction: left or right
+        const direction = Math.random() > 0.5 ? 50 : -50;
+        
+        const x = Math.random() * 80 + 10;
+        const y = Math.random() * 80 + 10;
+        
+        sparkle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: white;
+            border-radius: 50%;
+            left: ${x}%;
+            top: ${y}%;
+            pointer-events: none;
+            z-index: 10;
+            box-shadow: 0 0 ${size * 2}px rgba(255, 255, 255, 0.9);
+            --direction: ${direction}px;
+            animation: sparkleRise 1s ease-out forwards;
+        `;
+        
+        badge.appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1000);
+    }
+});
+
+// Sparkles flying outward from badge edges
+document.addEventListener('DOMContentLoaded', function() {
+    const badges = document.querySelectorAll('.badge');
+    
+    badges.forEach(badge => {
+        let sparkleInterval;
+        
+        badge.addEventListener('mouseenter', function() {
+            sparkleInterval = setInterval(() => {
+                createSparkleOutward(badge);
+            }, 10);
+        });
+        
+        badge.addEventListener('mouseleave', function() {
+            clearInterval(sparkleInterval);
+        });
+    });
+    
+    function createSparkleOutward(badge) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle-particle';
+        
+        const sizes = [3, 4, 5, 6, 7];
+        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        
+        // Random side: left or right edge
+        const isLeftSide = Math.random() > 0.5;
+        const x = isLeftSide ? 0 : 100;
+        const y = Math.random() * 100;
+        
+        // Direction: fly outward from the edge
+        const direction = isLeftSide ? -60 : 60;
+        
+        sparkle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: white;
+            border-radius: 50%;
+            left: ${x}%;
+            top: ${y}%;
+            pointer-events: none;
+            z-index: 10;
+            box-shadow: 0 0 ${size * 2}px rgba(255, 255, 255, 0.9);
+            --direction: ${direction}px;
+            animation: sparkleRise 1.2s ease-out forwards;
+        `;
+        
+        badge.appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1200);
+    }
+});
+
+// Sparkles bursting outward from badge center
+document.addEventListener('DOMContentLoaded', function() {
+    const badges = document.querySelectorAll('.badge');
+    
+    badges.forEach(badge => {
+        let sparkleInterval;
+        
+        badge.addEventListener('mouseenter', function() {
+            sparkleInterval = setInterval(() => {
+                createBurstSparkle(badge);
+            }, 80);
+        });
+        
+        badge.addEventListener('mouseleave', function() {
+            clearInterval(sparkleInterval);
+            // Clean up any remaining sparkles
+            badge.querySelectorAll('.sparkle-burst').forEach(s => s.remove());
+        });
+    });
+    
+    function createBurstSparkle(badge) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle-burst';
+        
+        const sizes = [3, 4, 5, 6, 7, 8];
+        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        
+        // Start from center
+        const startX = 50;
+        const startY = 50;
+        
+        // Random angle for direction
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 80 + Math.random() * 40;
+        
+        const endX = Math.cos(angle) * distance;
+        const endY = Math.sin(angle) * distance;
+        
+        sparkle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: white;
+            border-radius: 50%;
+            left: ${startX}%;
+            top: ${startY}%;
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: 0 0 ${size * 3}px rgba(255, 255, 255, 1);
+            --endX: ${endX}px;
+            --endY: ${endY}px;
+        `;
+        
+        badge.appendChild(sparkle);
+        
+        // Animate
+        setTimeout(() => {
+            sparkle.style.transition = 'all 1s ease-out';
+            sparkle.style.transform = `translate(${endX}px, ${endY}px) scale(0.2)`;
+            sparkle.style.opacity = '0';
+        }, 10);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1100);
+    }
+});
+
+
+// Sparkles on chatbot hover only
+document.addEventListener('DOMContentLoaded', function() {
+    const chatbot = document.querySelector('.cute-robot');
+    
+    if (chatbot) {
+        let sparkleInterval;
+        
+        chatbot.addEventListener('mouseenter', function() {
+            sparkleInterval = setInterval(() => {
+                createChatbotSparkle(chatbot);
+            }, 10);
+        });
+        
+        chatbot.addEventListener('mouseleave', function() {
+            clearInterval(sparkleInterval);
+        });
+    }
+    
+    function createChatbotSparkle(bot) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'chatbot-sparkle';
+        
+        const size = Math.random() * 4 + 2;
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 25 + Math.random() * 20;
+        
+        const endX = Math.cos(angle) * distance;
+        const endY = Math.sin(angle) * distance;
+        
+        sparkle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: #0B9FD8;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 0 ${size * 3}px rgba(11, 159, 216, 0.9);
+            transform: translate(-50%, -50%);
+        `;
+        
+        // Append to body with fixed position relative to chatbot
+        const rect = bot.getBoundingClientRect();
+        sparkle.style.position = 'fixed';
+        sparkle.style.left = rect.left + rect.width / 2 + 'px';
+        sparkle.style.top = rect.top + rect.height / 2 + 'px';
+        
+        document.body.appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.style.transition = 'all 0.8s ease-out';
+            sparkle.style.transform = `translate(${endX}px, ${endY}px)`;
+            sparkle.style.opacity = '0';
+        }, 10);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 900);
+    }
+});
