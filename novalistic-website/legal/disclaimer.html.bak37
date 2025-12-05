@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer - Novalistic.ai</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .policy-container {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 40px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+        .policy-container h1 {
+            color: #0D5E7D;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: justify;
+        }
+        .policy-container h2 {
+            color: #0D5E7D;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 18px;
+            text-align: justify;
+        }
+        .policy-container p {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 15px;
+        }
+        .back-link {
+            color: #0B9FD8;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="policy-container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>Legal Notice & Disclaimer</h1>
+        <p><strong>Last Updated:</strong> November 29, 2025</p>
+        
+        <h2>1. Company Information</h2>
+        <p>Novalistic.AI LLC<br>
+        Email: info@novalistic.ai<br>
+        Phone: +1-706-714-5143</p>
+        
+        <h2>2. General Information Disclaimer</h2>
+        <p>The information provided by Novalistic.AI LLC on our website and through our AI chatbot services is for general informational purposes only. All information is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information.</p>
+        
+        <h2>3. AI-Generated Content Disclaimer</h2>
+        <p><strong>AI-generated content is not guaranteed to be accurate.</strong> Our AI chatbot services use artificial intelligence and machine learning technologies. While we strive for accuracy, AI-generated responses may contain errors, inaccuracies, or incomplete information. Users should verify important information independently and not rely solely on AI-generated content for critical decisions.</p>
+        
+        <h2>4. No Professional Advice</h2>
+        <p><strong>Nothing in our Services constitutes legal, financial, medical, or professional advice.</strong> The content provided through our services is not intended to be a substitute for professional advice. Always seek the advice of qualified professionals with any questions you may have regarding specific matters. You are responsible for how you use AI-generated outputs.</p>
+        
+        <h2>5. No Warranties</h2>
+        <p>Our Services are provided "as is" without warranties of any kind, including accuracy, reliability, or availability. We make no guarantees about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained in our services.</p>
+        
+        <h2>6. Service Availability</h2>
+        <p>We make no guarantees regarding the availability, reliability, or uninterrupted access to our services. Our services may be temporarily unavailable due to maintenance, updates, or circumstances beyond our control. We reserve the right to modify, suspend, or discontinue any aspect of our services at any time without prior notice.</p>
+        
+        <h2>7. Third-Party Links & Tools</h2>
+        <p>Our services may contain links to third-party websites or services that are not owned or controlled by Novalistic.AI LLC. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services. We are not responsible for content, policies, or availability of third-party tools or platforms.</p>
+        
+        <h2>8. Limitation of Liability</h2>
+        <p><strong>Under no circumstance shall Novalistic.AI LLC have any liability to you for any loss or damage of any kind incurred as a result of the use of our services or reliance on any information provided.</strong> Your use of our services and reliance on any information is solely at your own risk. We shall not be liable for any indirect, incidental, special, consequential, or punitive damages.</p>
+        
+        <h2>9. Accuracy of Information</h2>
+        <p>While we strive to keep the information on our website and services up to date and correct, we make no representations or warranties about the completeness, accuracy, reliability, suitability, or availability of the information for any purpose.</p>
+        
+        <h2>10. DMCA Notice</h2>
+        <p>If you believe content infringes your copyright, contact us at info@novalistic.ai with supporting evidence including: description of copyrighted work, location of infringing material, your contact information, and a statement of good faith belief.</p>
+        
+        <h2>11. Changes to This Disclaimer</h2>
+        <p>We reserve the right to modify this disclaimer at any time. Changes will be effective immediately upon posting to our website. Your continued use of our services following any changes constitutes acceptance of those changes.</p>
+        
+        <h2>12. Contact Information</h2>
+        <p>For all legal inquiries:<br>
+        Novalistic.AI LLC<br>
+        Email: info@novalistic.ai<br>
+        Phone: +1-706-714-5143</p>
+    </div>
+</body>
+</html>
