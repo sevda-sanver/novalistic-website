@@ -17,7 +17,6 @@ A professional, modern website for Novalistic.ai - showcasing AI chatbots and au
   - Professional footer
 
 ## 📁 Project Structure
-
 novalistic-website/
 ├── index.html
 ├── README.md
@@ -56,24 +55,23 @@ novalistic-website/
 
 ## 📝 Customization
 
-- Email: info@novalistic.ai  
-- Phone: +1 (706) 714 5143
-- Location: Raleigh, NC
+- **Email**: info@novalistic.ai  
+- **Phone**: +1 (706) 714 5143  
+- **Location**: Raleigh, NC  
 
 ## 🚀 Deployment
 
-
 This website is deployed as a dynamic website on **Netlify**.  
 
-It can also be deployed to other hosting services if needed:
-- GitHub Pages (static)
-- Vercel
-- Other web hosting providers
+It can also be deployed to other hosting services if needed:  
+- GitHub Pages (static)  
+- Vercel  
+- Other web hosting providers  
 
 ## 📱 Responsive Breakpoints
 
 - Desktop: 1024px+  
 - Tablet: 768–1023px  
-- Mobile: <768px
+- Mobile: <768px  
 
 **Built with ❤️ for Novalistic.ai**
