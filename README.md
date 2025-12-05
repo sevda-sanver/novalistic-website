@@ -56,13 +56,19 @@ novalistic-website/
 
 ## 📝 Customization
 
-- Email: hello@novalistic.ai  
-- Phone: +1 (555) 123-4567  
-- Location: San Francisco, CA
+- Email: info@novalistic.ai  
+- Phone: +1 (706) 714 5143
+- Location: Raleigh, NC
 
 ## 🚀 Deployment
 
-Static website can be deployed to GitHub Pages, Netlify, Vercel, or any web hosting service.
+
+This website is deployed as a dynamic website on **Netlify**.  
+
+It can also be deployed to other hosting services if needed:
+- GitHub Pages (static)
+- Vercel
+- Other web hosting providers
 
 ## 📱 Responsive Breakpoints
 
