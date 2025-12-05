@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Novalistic.ai Website
 
 A professional, modern website for Novalistic.ai - showcasing AI chatbots and automation solutions.
@@ -18,102 +17,61 @@ A professional, modern website for Novalistic.ai - showcasing AI chatbots and au
   - Professional footer
 
 ## 📁 Project Structure
-
-```
 novalistic-website/
-├── index.html                 # Main homepage
-├── README.md                  # Project documentation
-├── assets/                    # All static assets
-│   ├── css/                   # Stylesheets
-│   │   ├── styles.css
-│   │   └── styles.css.backup
-│   ├── js/                    # JavaScript files
-│   │   ├── script.js
-│   │   ├── nav-animation.js
-│   │   └── *.bak*             # Script backups
-│   ├── images/                # Images and SVG files
-│   │   ├── logo.png
-│   │   ├── bottom logo.png
-│   │   ├── robot.png
-│   │   └── *.svg              # SVG icons
-│   └── animations/            # Animation files
-│       └── chatbot-animation.json
-├── blog/                      # Blog articles (12 files)
-│   ├── blog-ai-automation.html
-│   ├── blog-why-small-businesses-ai.html
-│   ├── blog-7-automations-2026.html
-│   └── ...                    # Other blog posts
-├── legal/                     # Legal documents (15 files)
-│   ├── privacy.html
-│   ├── terms.html
-│   ├── cookies.html
-│   ├── dpa.html
-│   ├── disclaimer.html
-│   └── *.bak*                 # Legal document backups
-└── backups/                   # Old index.html backups (23 files)
-    └── index.html.bak*
-```
+├── index.html
+├── README.md
+├── assets/
+│ ├── css/
+│ │ ├── styles.css
+│ │ └── styles.css.backup
+│ ├── js/
+│ │ ├── script.js
+│ │ ├── nav-animation.js
+│ │ └── *.bak
+│ ├── images/
+│ │ ├── logo.png
+│ │ ├── bottom logo.png
+│ │ ├── robot.png
+│ │ └── *.svg
+│ └── animations/
+│ └── chatbot-animation.json
+├── blog/
+├── legal/
+└── backups/
 
 ## 🎨 Design Features
 
-- **Color Scheme**: Uses your brand colors (#0B9FD8, #0D5E7D)
-- **Typography**: Inter font for clean, modern look
-- **Gradients**: Custom gradients matching your brand
+- **Color Scheme**: #0B9FD8, #0D5E7D
+- **Typography**: Inter font
+- **Gradients**: Custom gradients
 - **Dark Theme**: Professional dark background with bright accents
-- **Animations**: Smooth transitions and floating animations
+- **Animations**: Smooth transitions
 
 ## 🛠️ How to Use
 
-1. **Place your logo**: Make sure `logo.png` is in the same directory as the HTML file
-2. **Open the website**: Simply open `index.html` in your browser
-3. **Customize content**: Edit the HTML to update text, prices, or contact information
-4. **Modify styling**: Adjust colors and spacing in `styles.css`
+1. Place `logo.png` in the same directory as HTML
+2. Open `index.html` in browser
+3. Edit HTML or CSS to customize
 
 ## 📝 Customization
 
-### Update Contact Information
-Edit the contact section in `index.html`:
-- Email: hello@novalistic.ai
-- Phone: +1 (555) 123-4567
-- Location: San Francisco, CA
-
-### Modify Pricing
-Edit the pricing cards in `index.html` to update:
-- Plan names
-- Prices
-- Features included
-- Call-to-action buttons
-
-### Change Colors
-Update CSS variables in `styles.css`:
-```css
-:root {
-    --primary-blue: #0B9FD8;
-    --dark-blue: #0D5E7D;
-    /* ... other colors */
-}
-```
+- **Email**: info@novalistic.ai  
+- **Phone**: +1 (706) 714 5143  
+- **Location**: Raleigh, NC  
 
 ## 🚀 Deployment
 
-This is a static website that can be deployed to:
-- GitHub Pages
-- Netlify
-- Vercel
-- Any web hosting service
+This website is deployed as a dynamic website on **Netlify**.  
 
-Simply upload all files to your hosting provider.
+It can also be deployed to other hosting services if needed:  
+- GitHub Pages (static)  
+- Vercel  
+- Other web hosting providers  
 
 ## 📱 Responsive Breakpoints
 
-- Desktop: 1024px and above
-- Tablet: 768px - 1023px
-- Mobile: Below 768px
+- Desktop: 1024px+  
+- Tablet: 768–1023px  
+- Mobile: <768px  
 
----
-
-**Built with ❤️ for Novalistic.ai - Shaping Tomorrow with AI**
-=======
-# novalistic-website
-Novalistic.ai website
->>>>>>> c2b318b6010211048a230dfc1c68742da76d47f8
+**Built with ❤️ for Novalistic.ai**

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Novalistic</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .thank-you-container {
+            max-width: 800px;
+            margin: 150px auto 80px;
+            padding: 80px 50px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .success-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: white;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .thank-you-container h1 {
+            color: var(--primary-color);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .thank-you-container p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+
+        .thank-you-container .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            animation: fadeInUp 0.6s ease-out 0.6s backwards;
+        }
+
+        .info-box h3 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .info-box ul li {
+            color: var(--text-secondary);
+            padding: 8px 0;
+            font-size: 1rem;
+        }
+
+        .info-box ul li::before {
+            content: "✓ ";
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            animation: fadeInUp 0.6s ease-out 0.8s backwards;
+        }
+
+        .cta-button {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(11, 159, 216, 0.3);
+        }
+
+        .secondary-button {
+            padding: 15px 35px;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .secondary-button:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(11, 159, 216, 0.1), rgba(52, 73, 94, 0.1));
+            border-radius: 10px;
+            animation: fadeInUp 0.6s ease-out 1s backwards;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .thank-you-container {
+                margin: 120px 20px 50px;
+                padding: 50px 30px;
+            }
+
+            .thank-you-container h1 {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .cta-button,
+            .secondary-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="Novalistic.ai Logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Company ▼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="why-choose-us.html">Why Choose Us</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Resources ▼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="demos.html">Watch Demos</a></li>
+                            <li><a href="documentation.html">Documentation</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#blog">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Thank You Container -->
+    <div class="thank-you-container">
+        <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+        </div>
+
+        <h1>Thank You!</h1>
+        
+        <p>
+            We've received your request and our team is already reviewing your information.
+        </p>
+
+        <div class="info-box">
+            <h3>What Happens Next?</h3>
+            <ul>
+                <li>Our team will review your request within 24 hours</li>
+                <li>You'll receive a confirmation email at the address you provided</li>
+                <li>A dedicated account manager will reach out to discuss your needs</li>
+                <li>We'll schedule a personalized demo tailored to your business</li>
+            </ul>
+        </div>
+
+        <p>
+            In the meantime, feel free to explore our resources or reach out to us directly.
+        </p>
+
+        <div class="button-group">
+            <a href="index.html" class="cta-button">Back to Home</a>
+            <a href="demos.html" class="secondary-button">View Demos</a>
+            <a href="documentation.html" class="secondary-button">Documentation</a>
+        </div>
+
+        <div class="contact-info">
+            <p><strong>Need immediate assistance?</strong></p>
+            <p>Email us at <span class="highlight">info@novalistic.ai</span></p>
+            <p>We typically respond within 2-4 hours during business hours</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-logo"><span class="logo-nova">Nova</span><span class="logo-listic">listic</span></h3>
+                <p class="footer-description">Bridging the gap between evolving AI technology and modern business needs.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Novalistic. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/nav-animation.js"></script>
+</body>
+</html>

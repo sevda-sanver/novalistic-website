@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starter Plan - Get Started | Novalistic</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .form-container {
+            max-width: 700px;
+            margin: 150px auto 80px;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .form-header .plan-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group label span {
+            color: #e74c3c;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(11, 159, 216, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #0B9FD8, #34495e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(11, 159, 216, 0.3);
+        }
+
+        .plan-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .plan-details h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .plan-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan-details ul li {
+            color: var(--text-secondary);
+            padding: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 120px 20px 50px;
+                padding: 30px 20px;
+            }
+
+            .form-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="Novalistic.ai Logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Company ▼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="why-choose-us.html">Why Choose Us</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Resources ▼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="demos.html">Watch Demos</a></li>
+                            <li><a href="documentation.html">Documentation</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#blog">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Container -->
+    <div class="form-container">
+        <div class="form-header">
+            <span class="plan-badge">Starter Plan</span>
+            <h1>Get Started Today</h1>
+            <p>Fill out the form below and we'll get back to you within 24 hours</p>
+        </div>
+
+        <form name="starter-plan" method="POST" data-netlify="true" action="/thank-you.html">
+            <input type="hidden" name="form-name" value="starter-plan">
+            <input type="hidden" name="plan" value="Starter Plan">
+
+            <div class="form-group">
+                <label for="name">Full Name <span>*</span></label>
+                <input type="text" id="name" name="name" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address <span>*</span></label>
+                <input type="email" id="email" name="email" required placeholder="john@company.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number <span>*</span></label>
+                <input type="tel" id="phone" name="phone" required placeholder="+1 (555) 123-4567">
+            </div>
+
+            <div class="form-group">
+                <label for="company">Company Name <span>*</span></label>
+                <input type="text" id="company" name="company" required placeholder="Your Company Inc.">
+            </div>
+
+            <div class="form-group">
+                <label for="website">Website URL</label>
+                <input type="url" id="website" name="website" placeholder="https://yourcompany.com">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Additional Information</label>
+                <textarea id="message" name="message" placeholder="Tell us more about your needs..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Submit Request</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-logo"><span class="logo-nova">Nova</span><span class="logo-listic">listic</span></h3>
+                <p class="footer-description">Bridging the gap between evolving AI technology and modern business needs.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Novalistic. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/nav-animation.js"></script>
+</body>
+</html>
