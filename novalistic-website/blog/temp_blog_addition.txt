@@ -1,0 +1,20 @@
+                
+                <div class="blog-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;">
+                    <div style="padding: 30px;">
+                        <div style="color: #0B9FD8; font-size: 14px; font-weight: 600; margin-bottom: 10px;">CUSTOMER SERVICE</div>
+                        <h3 style="font-size: 22px; color: #0D5E7D; margin-bottom: 15px; line-height: 1.4;">How AI Chatbots Are Revolutionizing Customer Service</h3>
+                        <p style="color: #666; line-height: 1.7; margin-bottom: 20px;">Discover how modern AI chatbots transform customer service from cost center to competitive advantage.</p>
+                        <a href="blog-customer-service-revolution.html" style="color: #0B9FD8; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center;">Read Article →</a>
+                    </div>
+                </div>
+                
+                <div class="blog-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;">
+                    <div style="padding: 30px;">
+                        <div style="color: #0B9FD8; font-size: 14px; font-weight: 600; margin-bottom: 10px;">TRANSFORMATION</div>
+                        <h3 style="font-size: 22px; color: #0D5E7D; margin-bottom: 15px; line-height: 1.4;">From Overwhelmed to Optimized: AI Transformation Journey</h3>
+                        <p style="color: #666; line-height: 1.7; margin-bottom: 20px;">The complete roadmap for small business owners ready to escape the growth trap with AI automation.</p>
+                        <a href="blog-business-transformation.html" style="color: #0B9FD8; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center;">Read Article →</a>
+                    </div>
+                </div>
+                
+            </div>

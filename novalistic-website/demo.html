@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot Demo - Novalistic.AI</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            min-height: 100vh;
+            padding: 100px 20px 20px;
+            cursor: pointer;
+        }
+
+        body:hover {
+            cursor: pointer;
+        }
+
+        .demo-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto 60px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 85vh;
+            max-height: 800px;
+            position: relative;
+            z-index: 1;
+            cursor: default;
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, #0B9FD8 0%, #0B7FA8 100%);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(11, 159, 216, 0.3);
+        }
+
+        .bot-avatar {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .bot-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .close-demo {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            z-index: 10;
+        }
+
+        .close-demo:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .demo-title {
+            flex: 1;
+        }
+
+        .demo-title h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .demo-title p {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .demo-features {
+            font-size: 11px;
+            opacity: 0.8;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .demo-features span {
+            white-space: nowrap;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            animation: messageSlideIn 0.4s ease;
+            max-width: 85%;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user-message {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bot-message .message-avatar {
+            background: linear-gradient(135deg, #0B9FD8 0%, #0B7FA8 100%);
+            color: white;
+        }
+
+        .user-message .message-avatar {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+        }
+
+        .message-content {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            line-height: 1.6;
+            font-size: 15px;
+            color: #1a1a1a;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .user-message .message-content {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+        }
+
+        .message-content strong {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .message-content strong:first-child {
+            margin-top: 0;
+        }
+
+        .typing-indicator {
+            display: none;
+            gap: 12px;
+            margin-bottom: 0;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+        }
+
+        .typing-indicator.user-typing {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .typing-indicator.bot-typing {
+            align-self: flex-start;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 5px;
+            padding: 14px 18px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .typing-indicator.user-typing .typing-dots {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #0B9FD8;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator.user-typing .typing-dot {
+            background: white;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+
+        .demo-controls {
+            background: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .scenario-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .control-button {
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button,
+        .pause-button,
+        .skip-button {
+            padding: 10px 20px;
+            font-size: 13px;
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .play-button:hover,
+        .pause-button:hover,
+        .skip-button:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .scenario-button {
+            background: linear-gradient(135deg, #0B9FD8 0%, #0B7FA8 100%);
+            color: white;
+            min-width: 180px;
+            padding: 14px 28px;
+            font-size: 15px;
+        }
+
+        .scenario-button.active {
+            background: linear-gradient(135deg, #0B7FA8 0%, #0B5F78 100%);
+            box-shadow: 0 4px 12px rgba(11, 159, 216, 0.4);
+        }
+
+        .scenario-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(11, 159, 216, 0.4);
+        }
+
+        .pause-button {
+            background: #f3f4f6;
+            color: #1a1a1a;
+        }
+
+        .pause-button:hover {
+            background: #e5e7eb;
+        }
+
+        .pause-button.paused {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .skip-button {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .skip-button:hover {
+            background: #fde68a;
+        }
+
+        /* Voiceflow-style button options */
+        .button-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .option-button {
+            background: #ffffff;
+            border: 2px solid #0B9FD8;
+            color: #0B9FD8;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            box-shadow: 0 2px 6px rgba(11, 159, 216, 0.15);
+        }
+
+        .option-button:hover {
+            background: #0B9FD8;
+            color: white;
+            transform: translateX(4px);
+        }
+
+        /* Plan options styling */
+        .plan-option {
+            background: #f8f9fa;
+            border-left: 3px solid #0B9FD8;
+            padding: 10px 16px;
+            margin: 8px 0;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .plan-detail {
+            font-weight: 400;
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* Highlight text instead of bold */
+        .highlight-text {
+            color: #0B9FD8;
+            font-weight: 600;
+        }
+
+        .highlight-plan {
+            color: #0B9FD8;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Schedule section headers */
+        .schedule-section {
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Plan name styling - replaces bold asterisks */
+        .plan-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .photo-item {
+            background: #e0e0e0;
+            padding: 0;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #d0d0d0;
+            overflow: hidden;
+            position: relative;
+            height: 140px;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(11, 159, 216, 0.9);
+            color: white;
+            padding: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .property-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 12px;
+        }
+
+        .property-card-header {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .property-photo {
+            width: 80px;
+            height: 80px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d0d0d0;
+            font-size: 32px;
+            overflow: hidden;
+        }
+
+        .property-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-details {
+            flex: 1;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .property-details strong {
+            font-size: 14px;
+            color: #0B9FD8;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .property-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .property-link {
+            flex: 1;
+            padding: 8px;
+            background: white;
+            border: 1px solid #0B9FD8;
+            border-radius: 6px;
+            color: #0B9FD8;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .demo-container {
+                height: 95vh;
+                border-radius: 0;
+            }
+
+            .chat-container {
+                padding: 20px;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .property-card-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Novalistic.ai Logo"></a>
+                </div>
+                <ul class="nav-links">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Company ▼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="why-choose-us.html">Why Choose Us</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Resources ▼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="demos.html">Watch Demos</a></li>
+                            <li><a href="documentation.html">Documentation</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="demo-container">
+        <div class="demo-header">
+            <a href="index.html" class="close-demo" title="Back to Home">✕</a>
+            <div class="bot-avatar" id="botAvatarImg">
+                <img src="https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg" alt="AI Assistant">
+            </div>
+            <div class="demo-title">
+                <h2 id="demoTitle">Real Estate AI Assistant</h2>
+                <p id="demoSubtitle">See how our AI helps customers find their dream home</p>
+                <div class="demo-features" id="demoFeatures">
+                    <span>🔍 AI Property Match</span>
+                    <span>•</span>
+                    <span>🧠 Smart Recommendations</span>
+                    <span>•</span>
+                    <span>🗓️ Book a Showing</span>
+                </div>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Demo Simulation</span>
+            </div>
+        </div>
+
+        <div class="chat-container" id="chatMessages">
+        </div>
+
+        <div class="demo-controls">
+            <div class="control-row">
+                <button class="control-button play-button" id="playButton" onclick="togglePause()">▶ Play</button>
+                <button class="control-button pause-button" id="pauseButton" onclick="togglePause()" style="display:none;">⏸ Pause</button>
+                <button class="control-button skip-button" id="skipButton" onclick="skipToEnd()">⏭ Skip to End</button>
+            </div>
+            <div class="scenario-row" id="scenarioButtons">
+                <button class="control-button scenario-button active" id="scenario1" onclick="loadScenario(1)" style="display:none;">Rental Property Chatbot</button>
+                <button class="control-button scenario-button" id="scenario2" onclick="loadScenario(2)" style="display:none;">Home Purchase Chatbot</button>
+                <button class="control-button scenario-button" id="scenario3" onclick="loadScenario(3)" style="display:none;">E-Commerce Shopping</button>
+                <button class="control-button scenario-button" id="scenario4" onclick="loadScenario(4)" style="display:none;">Fitness & Wellness</button>
+                <button class="control-button scenario-button" id="scenario5" onclick="loadScenario(5)" style="display:none;">Gym Membership</button>
+                <button class="control-button scenario-button" id="scenario6" onclick="loadScenario(6)" style="display:none;">Online Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scenarios = {
+            1: {
+                title: "Rental Apartment Assistant",
+                subtitle: "See how our AI helps customers find their perfect rental",
+                features: "🔍 AI Property Match • 🧠 Smart Recommendations • 🗓️ Book a Showing",
+                conversation: [
+                    { type: 'user', text: "Hi, I'm looking for a 3-bedroom house in Austin under $900k", delay: 2000, typingDelay: 500, preloaded: true },
+                    { type: 'bot', text: "Hi there! 👋 Welcome to Austin Home Finder. My name is Alex, and I'll be assisting you today. I'm here to help you find your perfect home. Before we dive into the search, may I have your name?", delay: 2000, typingDelay: 500 },
+                    { type: 'user', text: "Hi, I'm Ashley Moore", delay: 2000, typingDelay: 500 },
+                    { type: 'bot', text: "Great to meet you, Ashley! 😊 I'm excited to help you find your dream home. A 3-bedroom under $900K - perfect! To narrow down the best options, are there specific neighborhoods you're interested in? Also, do you have kids or planning for good school districts?", delay: 2200, typingDelay: 500 },
+                    { type: 'user', text: "I'm open to neighborhoods, but good schools are important. We have two kids", delay: 3000, typingDelay: 500 },
+                    { type: 'bot', text: "Wonderful! Family-friendly neighborhoods with great schools - I've got you covered! I found 7 properties matching your criteria in top-rated school districts. Here are the top 3:\n\n🏠 1) 3BR/2BA in Pflugerville (Round Rock ISD) - $445K\n🏠 2) 3BR/2.5BA in Cedar Park (Leander ISD) - $479K\n🏠 3) 4BR/2BA in Kyle (Hays CISD) - $485K\n\nAll have excellent schools rated 8+ on GreatSchools. Would you like to see photos and details of any of these?", delay: 2500, typingDelay: 500 },
+                    { type: 'user', text: "Yes! Can I see the Cedar Park one?", delay: 2800, typingDelay: 500 },
+                    { 
+                        type: 'bot', 
+                        text: "Absolutely, Ashley! Here are photos of the Cedar Park property - great choice! 📸", 
+                        delay: 2000,
+                        typingDelay: 0,
+                        photos: [
+                            { url: "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=600", label: "Kitchen" },
+                            { url: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600", label: "Living Room" },
+                            { url: "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=600", label: "Master Bedroom" },
+                            { url: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600", label: "Backyard" }
+                        ]
+                    },
+                    { type: 'user', text: "This looks great! Can I schedule a showing?", delay: 2800, typingDelay: 500 },
+                    { type: 'bot', text: "Love your enthusiasm! 🎉 This home is a gem - updated kitchen, spacious backyard, and only 2 years old. Perfect for your family! I have the following showing times available:\n\n📅 Today at 4:30 PM\n📅 Tomorrow at 10:00 AM or 2:00 PM\n📅 Monday at 11:00 AM\n\nWhich works best for you?", delay: 2200, typingDelay: 500 },
+                    { type: 'user', text: "Tomorrow at 2 PM works. Do I need to bring anything?", delay: 2800, typingDelay: 500 },
+                    { type: 'bot', text: "Perfect, Ashley! ✅ I've scheduled your showing for tomorrow (Sunday) at 2:00 PM.\n\n📍 Address: 1247 Maple Ridge Dr, Cedar Park, TX 78613\n\nYour showing agent will be Sarah Mitchell - she'll reach out within the next 30 minutes to confirm. To make sure she can contact you, could you provide:\n\n📧 Email address\n📱 Phone number", delay: 2500, typingDelay: 500 },
+                    { type: 'user', text: "ashley.moore1@gmail.com and 512-789-4532", delay: 2600, typingDelay: 500 },
+                    { type: 'bot', text: "Perfect! 📬 I've sent the showing confirmation and property details to ashley.moore1@gmail.com. Sarah will also text you at 512-789-4532. The confirmation includes:\n\n✓ Showing address and time\n✓ Sarah's contact info (512-555-0147)\n✓ Property disclosure documents\n✓ Parking instructions\n✓ Directions\n\nYou should receive both the email and text within 2-3 minutes. Check your inbox and spam folder just in case!", delay: 3000, typingDelay: 500 },
+                    { type: 'user', text: "Got it, thanks! What about property taxes there?", delay: 2800, typingDelay: 500 },
+                    { type: 'bot', text: "Great question, Ashley! 💰 Cedar Park property tax rate is approximately 2.18% annually. For this $479K home, that's about $10,442/year or $870/month. This includes Williamson County, Leander ISD, and city taxes.\n\nI can also connect you with our preferred lender who can provide a full payment breakdown with current mortgage rates (currently around 6.8% for 30-year fixed). Would you like that introduction?", delay: 2800, typingDelay: 500 },
+                    { type: 'user', text: "Yes, and can you send me info on the other two properties too?", delay: 3200, typingDelay: 500 },
+                    { 
+                        type: 'bot', 
+                        text: "Absolutely! Here are the complete details for all three properties: 🏘️",
+                        delay: 2500,
+                        typingDelay: 0,
+                        propertyCards: [
+                            {
+                                name: "Pflugerville - $445K → $429K",
+                                details: "• 3BR / 2BA<br>• Built in 2019<br>• School ratings: 8 / 8 / 9<br>• Taxes: ~2.05%",
+                                photos: [
+                                    "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=300",
+                                    "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=300"
+                                ]
+                            },
+                            {
+                                name: "Cedar Park - $479K",
+                                details: "• 3BR / 2.5BA<br>• Built in 2022<br>• School ratings: 9 / 8 / 8<br>• Taxes: ~2.18%",
+                                photos: [
+                                    "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=300",
+                                    "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=300"
+                                ]
+                            },
+                            {
+                                name: "Kyle - $485K",
+                                details: "• 4BR / 2BA<br>• Built in 2020<br>• School ratings: 8 / 9 / 8<br>• Taxes: ~2.12%",
+                                photos: [
+                                    "https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=300",
+                                    "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=300"
+                                ]
+                            }
+                        ]
+                    },
+                    { type: 'bot', text: "All property details have been sent to ashley.moore1@gmail.com! 📨\n\nI've also introduced you to Marcus Rivera, our senior loan officer - he'll reach out within 2 hours with pre-qualification options.\n\nOne more thing: The Pflugerville property just got a price reduction to $429K (was $445K)! 🎊 If you'd like to see it tomorrow after your 2 PM showing, I can add it to your schedule. Interested?", delay: 2500, typingDelay: 500 },
+                    { type: 'user', text: "Sure, add it! What time?", delay: 2600, typingDelay: 500 },
+                    { type: 'bot', text: "Done! ✨ Your updated schedule:\n\n✅ 2:00 PM - Cedar Park showing (Sarah Mitchell)\n✅ 4:00 PM - Pflugerville showing (Mike Thompson)\n\nBoth agents will text you 1 hour before your appointments. All details sent to ashley.moore1@gmail.com and 512-789-4532.\n\nI'm so excited for you, Ashley! These are both fantastic homes for your family. 🏡 Any other questions?", delay: 2500, typingDelay: 500 },
+                    { type: 'user', text: "No, that's all. Thank you so much!", delay: 2600, typingDelay: 500 },
+                    { type: 'bot', text: "You're very welcome, Ashley! 😊 Best of luck with your showings tomorrow - I hope you find the perfect home for your family! Feel free to reach out anytime if you need anything else. Have a wonderful day! 🌟", delay: 2200, typingDelay: 500 }
+                ]
+            },
+            2: {
+                title: "Real Estate AI Assistant",
+                subtitle: "See how our AI helps customers find their dream home",
+                features: "🔍 AI Property Match • 🧠 Smart Recommendations • 🗓️ Book a Showing",
+                conversation: [
+                    { type: 'user', text: "Hi, I'm looking for a 2-bedroom apartment in the Dallas area. Do you have anything available?", delay: 2000, typingDelay: 500, preloaded: true },
+                    { type: 'bot', text: "Hi there! 👋 I'm Alex, and I'll be helping you today. I'd love to help you find the right place! To get started—may I have your name and what's your target monthly budget?", delay: 2000, typingDelay: 500 },
+                    { type: 'user', text: "I'm Jessica. Ideally under $3,500", delay: 2000, typingDelay: 500 },
+                    { type: 'bot', text: "Nice to meet you, Jessica! 😊 Great, that gives us plenty of good options! Do you need any particular amenities? For example:\n\n• In-unit laundry\n• Parking\n• Pet-friendly\n• Gym/pool\n\nYou can pick multiple!", delay: 3200, typingDelay: 500 },
+                    { type: 'user', text: "Pet-friendly and in-unit laundry are must-haves", delay: 2800, typingDelay: 500 },
+                    { type: 'bot', text: "Perfect! I just found 4 available units that meet your criteria. Here are the top 2:\n\n1️⃣ Uptown Dallas – $3,150/mo\n• 2BR / 2BA\n• In-unit washer/dryer\n• Pets allowed (up to 50 lbs)\n• Free parking\n📸 Photos available\n\n2️⃣ Plano – Legacy West – $3,280/mo\n• 2BR / 2BA\n• Brand new appliances\n• Pool + gym\n• Pet-friendly\n📸 Photos available\n\nWould you like to see photos or compare them side-by-side?", delay: 2500, typingDelay: 500 },
+                    { type: 'user', text: "Show me photos of the Uptown one", delay: 2600, typingDelay: 500 },
+                    {
+                        type: 'bot',
+                        text: "Sure thing! Here are the first 3 photos—kitchen, living room, and master bedroom. 📷",
+                        delay: 2000,
+                        typingDelay: 0,
+                        photos: [
+                            { url: "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=600", label: "Kitchen" },
+                            { url: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600", label: "Living Room" },
+                            { url: "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=600", label: "Master Bedroom" }
+                        ]
+                    },
+                    { type: 'user', text: "Looks good. How far is it from downtown?", delay: 2900, typingDelay: 500 },
+                    { type: 'bot', text: "It's a 7-minute drive or 12 minutes by DART light rail. 🚇 Parking is included, so driving is easy.\n\nWould you like to schedule an in-person tour?\n\nAvailable times:\n📅 Tomorrow at 5:30 PM\n📅 Friday at 11:00 AM\n📅 Friday at 3:00 PM", delay: 2200, typingDelay: 500 },
+                    { type: 'user', text: "Friday at 3 PM works", delay: 2400, typingDelay: 500 },
+                    { type: 'bot', text: "Great! I've scheduled your tour for Friday at 3:00 PM. ✅\n\n📍 Address: 1245 McKinney Ave, Dallas, TX\n\nYour showing agent will be Monica. She'll text you 30 minutes before your appointment.\n\nTo make sure she can reach you, could you provide:\n\n📧 Email address\n📱 Phone number", delay: 2500, typingDelay: 500 },
+                    { type: 'user', text: "jessica.palmer@gmail.com and 987-654-3210", delay: 2600, typingDelay: 500 },
+                    { type: 'bot', text: "Perfect! 📬 I've sent the tour confirmation to jessica.palmer@gmail.com. Monica will also text you at 987-654-3210.\n\nBefore you go—would you like me to check if the building has any move-in specials or discounts this month?", delay: 2600, typingDelay: 500 },
+                    { type: 'user', text: "Yes please", delay: 2200, typingDelay: 500 },
+                    { type: 'bot', text: "Good news! 🎉 They're offering 1 month FREE rent for leases starting before the 20th of this month. That brings your effective monthly cost down to about $2,887 in the first year.\n\nWould you like me to send you the full leasing details and application requirements?", delay: 2800, typingDelay: 500 },
+                    { type: 'user', text: "Yes, send it here", delay: 2400, typingDelay: 500 },
+                    { type: 'bot', text: "Done! Here's the full breakdown:\n\n💰 Application fee: $60\n💰 Deposit: $300\n🐕 Pet fee: $250 one-time + $25/mo\n📊 Income requirement: 3x monthly rent\n📅 Lease terms: 12 or 18 months\n\nIf you want, I can pre-check your eligibility without running your credit—just to make sure you meet their requirements. Interested?", delay: 2800, typingDelay: 500 },
+                    { type: 'user', text: "That would be great, thanks!", delay: 2400, typingDelay: 500 },
+                    { type: 'bot', text: "Wonderful! 😊 I'll send you a quick eligibility form via email. It takes about 2 minutes to complete, and we'll have an answer within 24 hours.\n\nAll details have been sent to jessica.palmer@gmail.com. Looking forward to seeing you at the tour on Friday! Have a great day! 🌟", delay: 2400, typingDelay: 500 }
+                ]
+            },
+            3: {
+                title: "E-Commerce Fashion Assistant",
+                subtitle: "See how our AI helps customers find and purchase products",
+                features: "🛍️ Smart Product Recommendations • 💳 Instant Checkout • 📦 Order Tracking",
+                conversation: [
+                    { type: 'user', text: "Hi, I need a blue midi dress", delay: 2500, typingDelay: 500, preloaded: true },
+                    { type: 'bot', text: "Hi there! 👋 Welcome to StyleHub. I'm Alex, your shopping assistant. What's your name?", delay: 2800, typingDelay: 1800 },
+                    { type: 'user', text: "Sarah", delay: 2500, typingDelay: 500 },
+                    { type: 'bot', text: "Nice to meet you, Sarah! 😊 Great choice! I found 3 blue midi dresses for you:\n\n👗 1. Luna Sleek Midi — $89 ⭐ 4.9\n👗 2. Noelle Satin Dress — $95 ⭐ 4.8\n👗 3. Sofia Classic — $120 ⭐ 4.7\n\nClick on one to see more details!", delay: 3000, typingDelay: 1800 },
+                    { type: 'user', text: "The second one", delay: 2800, typingDelay: 500 },
+                    { 
+                        type: 'bot', 
+                        text: "Excellent! The Noelle Satin Dress is trending right now. Here's what it looks like: 📸", 
+                        delay: 2800,
+                        typingDelay: 0,
+                        photos: [
+                            { url: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80", label: "Front View" },
+                            { url: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80", label: "Side Detail" }
+                        ]
+                    },
+                    { type: 'bot', text: "✅ Silky satin fabric\n✅ Elegant midi length\n✅ Available: S, M, L\n🚚 Ships in 2-3 days\n\nWhat's your size?", delay: 2600, typingDelay: 1800 },
+                    { type: 'user', text: "Medium", delay: 2500, typingDelay: 500 },
+                    { type: 'bot', text: "Perfect! Size M will fit beautifully, Sarah.\n\nBefore adding to cart, 92% of customers who bought this dress also loved these items:", delay: 3000, typingDelay: 1800 },
+                    {
+                        type: 'bot',
+                        text: "Complete the look: 👠👜✨",
+                        delay: 2500,
+                        typingDelay: 0,
+                        photos: [
+                            { url: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80", label: "Strappy Heels — $58" },
+                            { url: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&q=80", label: "Rose Clutch — $35" },
+                            { url: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80", label: "Silver Earrings — $22" }
+                        ]
+                    },
+                    { type: 'bot', text: "**Bundle deal:** Get all 3 accessories for just $99 (save $16!)\n\nInterested in the complete look or just the dress?", delay: 2800, typingDelay: 1800 },
+                    { type: 'user', text: "Just the dress", delay: 2600, typingDelay: 500 },
+                    { type: 'bot', text: "No problem! ✅ Added: Noelle Satin Dress - Size M - $95\n\nGood news — first-time shoppers get 10% off with code WELCOME10.\n\nApply discount?", delay: 3000, typingDelay: 1800 },
+                    { type: 'user', text: "Yes", delay: 2400, typingDelay: 500 },
+                    { type: 'bot', text: "✅ Discount applied! New total: **$85.50**\n\nQuick tip: Add $15 more to get free shipping! 🚚\n\nWant to browse accessories or ready to checkout?", delay: 2800, typingDelay: 1800 },
+                    { type: 'user', text: "Ready to checkout", delay: 2600, typingDelay: 500 },
+                    { type: 'bot', text: "Perfect! I'll need your email for order confirmation and tracking.", delay: 2500, typingDelay: 1800 },
+                    { type: 'user', text: "sarah.james@email.com", delay: 2800, typingDelay: 500 },
+                    { type: 'bot', text: "All set, Sarah! ✅\n\nYou'll receive:\n📧 Order confirmation\n📦 Tracking updates\n🎁 Exclusive VIP deals\n\nThanks for shopping with StyleHub! Your dress will arrive in 2-3 days. 🛍️", delay: 3000, typingDelay: 1800 }
+                ]
+            },
+            4: {
+                title: "Fitness & Wellness Assistant",
+                subtitle: "See how our AI helps customers explore gym memberships and classes",
+                features: "💪 Membership Plans • 📅 Trial Bookings • 🥗 Nutrition Programs",
+                conversation: [
+                    { type: 'user', text: "Hi, I'm just checking this gym out and want to learn more about it.", delay: 2000, typingDelay: 500, preloaded: true },
+                    { type: 'bot', text: "Hey there! 👋 Welcome to FitGym!\nI'd love to help. Before we start — what's your name?", delay: 2000, typingDelay: 500 },
+                    { type: 'user', text: "Mark", delay: 2000, typingDelay: 500 },
+                    { type: 'bot', text: "Nice to meet you, Mark 😊\nI'm Alex — here to help you explore the gym, classes, and options anytime you need.\n\nWhat would you like to check out first today?", delay: 2200, typingDelay: 1300 },
+                    {
+                        type: 'bot',
+                        text: '<div class="button-options"><button class="option-button">Can you show me your pricing and membership options?</button><button class="option-button">How much does it usually cost to train here?</button><button class="option-button">What kind of packages do you offer and what\'s included?</button><button class="option-button">Something else</button></div>',
+                        delay: 2300,
+                        typingDelay: 0
+                    },
+                    { type: 'user', text: "How much does it usually cost to train here?", delay: 2800, typingDelay: 1300 },
+                    { type: 'bot', text: "Great question, Mark ✅\n\nWe keep things simple and flexible. Here are our main options:\n\n• <span class='plan-name'>Basic – $59/month</span>\nAccess to gym & equipment\n\n• <span class='plan-name'>Pro – $89/month</span>\nGym access + unlimited group classes\n\n• <span class='plan-name'>Elite – $129/month</span>\nAll access + personal coach support\n\nIf you'd like, I can recommend the best option based on your goals.", delay: 2500, typingDelay: 1300 },
+                    { type: 'user', text: "Sure", delay: 2000, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect 🙌 Two quick questions:\n\n1. What's your main goal right now?\n   • Lose weight\n   • Build muscle\n   • Improve endurance\n   • Stay active & healthy\n\n2. How often do you see yourself training?\n   • 1–2 days/week\n   • 3–4 days/week\n   • 5+ days/week", delay: 2200, typingDelay: 1300 },
+                    { type: 'user', text: "Build muscle, 4 days", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Nice! 💪 Based on that, I'd recommend the <span class='plan-name'>Pro Plan – $89/month.</span>\n\nIt gives you:\n✅ Full access to strength & free-weight areas\n✅ Unlimited muscle & HIIT classes\n✅ Perfect fit for a 4-day split\n\nWould you like to see our class schedule for a typical day?", delay: 2800, typingDelay: 1300 },
+                    { type: 'user', text: "Yes", delay: 2000, typingDelay: 1300 },
+                    { type: 'bot', text: "Here's what a typical <span class='plan-name'>weekday schedule</span> looks like at our gym:\n\n<div class='schedule-section'>MORNING</div>\n• 6:00 AM – Strength & Conditioning\n• 7:30 AM – Cross Training\n• 9:00 AM – Yoga & Mobility\n• 10:30 AM – Core & Stability\n\n<div class='schedule-section'>AFTERNOON</div>\n• 12:00 PM – Upper Body Focus\n• 2:00 PM – Functional Training\n• 3:30 PM – Abs & Core\n• 5:00 PM – Speed & Agility\n\n<div class='schedule-section'>EVENING</div>\n• 6:00 PM – HIIT 🔥\n• 7:00 PM – Muscle Building\n• 8:00 PM – Boxing Fitness\n• 9:00 PM – Stretch & Recovery\n\nYou can join <span class='plan-name'>any class that fits your schedule.</span>", delay: 3000, typingDelay: 1300 },
+                    { type: 'bot', text: "We also offer <span class='plan-name'>optional nutrition programs for $29/month</span>, prepared by certified professionals based on your goals.\n\nWould you like to add a nutrition plan as well?", delay: 2500, typingDelay: 1300 },
+                    { type: 'user', text: "No, not right now.", delay: 2200, typingDelay: 1300 },
+                    { type: 'bot', text: "All good, Mark 🙂\n\nWould you like to <span class='plan-name'>book your free trial session</span> instead?", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "Yes, let's do that.", delay: 2200, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect! 📅\n\nWhat <span class='plan-name'>day and time</span> would you like to come in for your free trial session?", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "Thursday at 7 PM", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Awesome — I've reserved your <span class='plan-name'>free trial session for Thursday at 7:00 PM</span> ✅\n\nWould you like me to send you all the details by <span class='plan-name'>text message or email?</span>", delay: 2200, typingDelay: 1300 },
+                    { type: 'user', text: "Text message please.", delay: 2200, typingDelay: 1300 },
+                    { type: 'bot', text: "Sure thing 📲\n\nWhat's the best <span class='plan-name'>phone number</span> to send your confirmation to?", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "+1 (412) 000 - 0000", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect — I've sent your free trial details to <span class='plan-name'>+1 (412) 000 - 0000</span> ✅\n\nWe're excited to welcome you, Mark! 💪\n\nIf you need anything else before your visit, I'll be right here.", delay: 2500, typingDelay: 1300 },
+                    { type: 'user', text: "Thanks", delay: 2000, typingDelay: 1300 },
+                    { type: 'bot', text: "You're very welcome 😊\nSee you at the gym — your journey starts now.", delay: 2000, typingDelay: 1300 }
+                ]
+            },
+            5: {
+                title: "Gym Membership Assistant",
+                subtitle: "AI-powered gym membership and class booking assistant",
+                features: "💪 Membership Plans • 📅 Trial Bookings • 🥗 Nutrition Programs",
+                conversation: [
+                    { type: 'user', text: "Hi, I'm just checking this gym out and want to learn more about it.", delay: 2000, typingDelay: 500, preloaded: true },
+                    { type: 'bot', text: "Hey there! 👋 Welcome to FitGym!\nI'd love to help. Before we start — what's your name?", delay: 2000, typingDelay: 500 },
+                    { type: 'user', text: "Mark", delay: 2000, typingDelay: 500 },
+                    { type: 'bot', text: "Nice to meet you, Mark 😊\nI'm Alex — here to help you explore the gym, classes, and options anytime you need.\n\nWhat would you like to check out first today?", delay: 2200, typingDelay: 1300 },
+                    {
+                        type: 'bot',
+                        text: '<div class="button-options"><button class="option-button">Can you show me your pricing and membership options?</button><button class="option-button">How much does it usually cost to train here?</button><button class="option-button">What kind of packages do you offer and what\'s included?</button><button class="option-button">Something else</button></div>',
+                        delay: 2300,
+                        typingDelay: 0
+                    },
+                    { type: 'user', text: "How much does it usually cost to train here?", delay: 2800, typingDelay: 1300 },
+                    { type: 'bot', text: "Great question, Mark ✅\n\nWe keep things simple and flexible. Here are our main options:\n\n• Basic – $59/month\n  Access to gym & equipment\n\n• Pro – $89/month\n  Gym access + unlimited group classes\n\n• Elite – $129/month\n  All access + personal coach support\n\nIf you'd like, I can recommend the best option based on your goals.", delay: 2500, typingDelay: 1300 },
+                    { type: 'user', text: "Sure", delay: 2000, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect 🙌 Two quick questions:\n\n1. What's your main goal right now?\n   • Lose weight\n   • Build muscle\n   • Improve endurance\n   • Stay active & healthy\n\n2. How often do you see yourself training?\n   • 1–2 days/week\n   • 3–4 days/week\n   • 5+ days/week", delay: 2200, typingDelay: 1300 },
+                    { type: 'user', text: "Build muscle, 4 days", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Nice! 💪 Based on that, I'd recommend the Pro Plan – $89/month.\n\nIt gives you:\n✅ Full access to strength & free-weight areas\n✅ Unlimited muscle & HIIT classes\n✅ Perfect fit for a 4-day split\n\nWould you like to see our class schedule for a typical day?", delay: 2800, typingDelay: 1300 },
+                    { type: 'user', text: "Yes", delay: 2000, typingDelay: 1300 },
+                    { type: 'bot', text: "Here's what a typical weekday schedule looks like at our gym:\n\nMORNING\n\n• 6:00 AM – Strength & Conditioning\n• 7:30 AM – Cross Training\n• 9:00 AM – Yoga & Mobility\n• 10:30 AM – Core & Stability\n\nAFTERNOON\n\n• 12:00 PM – Upper Body Focus\n• 2:00 PM – Functional Training\n• 3:30 PM – Abs & Core\n• 5:00 PM – Speed & Agility\n\nEVENING\n\n• 6:00 PM – HIIT 🔥\n• 7:00 PM – Muscle Building\n• 8:00 PM – Boxing Fitness\n• 9:00 PM – Stretch & Recovery\n\nYou can join any class that fits your schedule.\n\nWe also offer optional nutrition programs for $29/month, prepared by certified professionals based on your goals.\n\nWould you like to add a nutrition plan as well?", delay: 3000, typingDelay: 1300 },
+                    { type: 'user', text: "No, not right now.", delay: 2200, typingDelay: 1300 },
+                    { type: 'bot', text: "All good, Mark 🙂\n\nWould you like to book your free trial session instead?", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "Yes, let's do that.", delay: 2200, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect! 📅\n\nWhat day and time would you like to come in for your free trial session?", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "Thursday at 7 PM", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Awesome — I've reserved your free trial session for Thursday at 7:00 PM ✅\n\nWould you like me to send you all the details by text message or email?", delay: 2200, typingDelay: 1300 },
+                    { type: 'user', text: "Text message please.", delay: 2200, typingDelay: 1300 },
+                    { type: 'bot', text: "Sure thing 📲\n\nWhat's the best phone number to send your confirmation to?", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "+1 (555) 482-9317", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect — I've sent your free trial details to +1 (555) 482-9317 ✅\n\nWe're excited to welcome you, Mark! 💪\n\nIf you need anything else before your visit, I'll be right here.", delay: 2500, typingDelay: 1300 },
+                    { type: 'user', text: "Thanks", delay: 2000, typingDelay: 1300 },
+                    { type: 'bot', text: "You're very welcome 😊\nSee you at the gym — your journey starts now.", delay: 2000, typingDelay: 1300 }
+                ]
+            },
+            6: {
+                title: "Restaurant Online Order",
+                subtitle: "AI-powered food ordering with pickup and delivery options",
+                features: "🍽️ Order Taking • 🚚 Delivery Tracking • 💳 Secure Payment",
+                conversation: [
+                    { type: 'user', text: "I'd like to order food", delay: 2000, typingDelay: 500, preloaded: true },
+                    { type: 'bot', text: "Great! 😊 What would you like to eat today?", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "Pasta", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect! Here are our pasta options 🍝:", delay: 2000, typingDelay: 1300 },
+                    {
+                        type: 'bot',
+                        text: '<div class="button-options"><button class="option-button">Truffle Pasta – $18</button><button class="option-button">Carbonara – $16</button><button class="option-button">Pesto Pasta – $15</button><button class="option-button">Bolognese – $17</button></div>',
+                        delay: 2300,
+                        typingDelay: 0
+                    },
+                    { type: 'user', text: "Truffle Pasta", delay: 2800, typingDelay: 1300 },
+                    { type: 'user', text: "Is there any allergen in it?", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Truffle Pasta contains:\n\n🍄 Black truffle oil\n🧈 Parmesan cheese\n🧄 Garlic & herbs\n🍝 Fresh fettuccine\n🥛 Cream sauce\n\n⚠️ Allergens: Dairy, Gluten, Eggs\n\nWould you like to proceed?", delay: 3000, typingDelay: 1300 },
+                    { type: 'user', text: "Yes, add it", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "✅ Added to cart:\n\n• Truffle Pasta – $18\n\nWould you like to add a drink?", delay: 2500, typingDelay: 1300 },
+                    { type: 'user', text: "Add a Cola", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "✅ Updated cart:\n\n• Truffle Pasta – $18\n• Cola – $3\n\nTotal: $21", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "🎁 Today's offers:\n\n• 15% off on first online order\n• Free dessert for reservations over 4 people\n• Loyalty members get 1 free meal after 10 visits", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Great news! 🎉\n\nYou qualify for our 15% first-time online order discount.\n\nI've applied the promo code to your order:\n\nNew Total: $17.85 (15% off)", delay: 2500, typingDelay: 1300 },
+                    { type: 'bot', text: "Please enter your delivery address:", delay: 2000, typingDelay: 1300 },
+                    { type: 'user', text: "123 Main Street, Apt 4B", delay: 2800, typingDelay: 1300 },
+                    { type: 'bot', text: "Perfect! ✅", delay: 2000, typingDelay: 1300 },
+                    { type: 'bot', text: "To complete your order, please proceed with payment.\n\nYou can pay securely through this link:\n\n💳 [Secure Payment Link]", delay: 2500, typingDelay: 1300 },
+                    { type: 'user', text: "Payment completed", delay: 2800, typingDelay: 1300 },
+                    { type: 'bot', text: "Thank you! 🎉 Your order is confirmed.\n\n📦 Track your order in real-time:\n🔗 [Live Order Tracking Link]\n\nEstimated delivery: 30-35 minutes\n\nEnjoy your meal! 😊", delay: 2500, typingDelay: 1300 }
+                ]
+            }
+        };
+
+        let currentScenario = 1;
+        let currentIndex = 0;
+        let isPlaying = false;
+        let isPaused = false;
+        let typingIndicator = null;
+        let currentTimeout = null;
+
+        function togglePause() {
+            isPaused = !isPaused;
+            const playBtn = document.getElementById('playButton');
+            const pauseBtn = document.getElementById('pauseButton');
+            
+            if (isPaused) {
+                playBtn.style.display = 'inline-block';
+                pauseBtn.style.display = 'none';
+                if (currentTimeout) {
+                    clearTimeout(currentTimeout);
+                    currentTimeout = null;
+                }
+                // Remove any existing typing indicator when pausing
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                    typingIndicator = null;
+                }
+            } else {
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline-block';
+                if (isPlaying && currentIndex < scenarios[currentScenario].conversation.length) {
+                    playNextMessage();
+                }
+            }
+        }
+
+        function skipToEnd() {
+            if (currentTimeout) clearTimeout(currentTimeout);
+            isPaused = false;
+            const pauseBtn = document.getElementById('pauseButton');
+            pauseBtn.textContent = '⏸ Pause';
+            pauseBtn.classList.remove('paused');
+            
+            const conversation = scenarios[currentScenario].conversation;
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            // Remove typing indicator if present
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+            
+            // Display all remaining messages instantly
+            for (let i = currentIndex; i < conversation.length; i++) {
+                const message = conversation[i];
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${message.type}-message`;
+
+                const messageAvatar = document.createElement('div');
+                messageAvatar.className = 'message-avatar';
+                if (message.type === 'bot') {
+                    if (currentScenario === 4 || currentScenario === 5) {
+                        messageAvatar.innerHTML = '<img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces" alt="Customer Service" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">';
+                    } else {
+                        messageAvatar.innerHTML = '<img src="https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg" alt="AI">';
+                    }
+                } else {
+                    messageAvatar.textContent = '👤';
+                }
+
+                const content = document.createElement('div');
+                content.className = 'message-content';
+                content.innerHTML = message.text.replace(/\n/g, '<br>');
+
+                if (message.photos) {
+                    const photoGrid = document.createElement('div');
+                    photoGrid.className = 'photo-grid';
+                    message.photos.forEach(photo => {
+                        photoGrid.innerHTML += `
+                            <div class="photo-item">
+                                <img src="${photo.url}" alt="${photo.label}">
+                                <div class="photo-label">${photo.label}</div>
+                            </div>
+                        `;
+                    });
+                    content.appendChild(photoGrid);
+                }
+
+                if (message.propertyCards) {
+                    message.propertyCards.forEach(card => {
+                        const cardDiv = document.createElement('div');
+                        cardDiv.className = 'property-card';
+                        cardDiv.innerHTML = `
+                            <div class="property-card-header">
+                                <div class="property-photo">
+                                    <img src="${card.photos[0]}" alt="House">
+                                </div>
+                                <div class="property-photo">
+                                    <img src="${card.photos[1]}" alt="Interior">
+                                </div>
+                                <div class="property-details">
+                                    <strong>${card.name}</strong>
+                                    ${card.details}
+                                </div>
+                            </div>
+                            <div class="property-links">
+                                <div class="property-link">🔗 Virtual Tour</div>
+                                <div class="property-link">📍 Map Location</div>
+                            </div>
+                        `;
+                        content.appendChild(cardDiv);
+                    });
+                }
+
+                messageDiv.appendChild(messageAvatar);
+                messageDiv.appendChild(content);
+                messagesContainer.appendChild(messageDiv);
+            }
+            
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            currentIndex = conversation.length;
+            isPlaying = false;
+        }
+
+        function loadScenario(scenarioNum) {
+            currentScenario = scenarioNum;
+            currentIndex = 0;
+            isPlaying = false;
+            isPaused = false;
+            if (currentTimeout) clearTimeout(currentTimeout);
+            
+            // Reset button visibility
+            document.getElementById('playButton').style.display = 'none';
+            document.getElementById('pauseButton').style.display = 'inline-block';
+            
+            document.querySelectorAll('.scenario-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('scenario' + scenarioNum).classList.add('active');
+            
+            document.getElementById('demoTitle').textContent = scenarios[scenarioNum].title;
+            document.getElementById('demoSubtitle').textContent = scenarios[scenarioNum].subtitle;
+            
+            // Update demo features from scenario data
+            const featuresContainer = document.getElementById('demoFeatures');
+            const features = scenarios[scenarioNum].features;
+            if (features) {
+                // Split by • and wrap each part in span
+                const parts = features.split(' • ');
+                let html = '';
+                parts.forEach((part, index) => {
+                    html += `<span>${part}</span>`;
+                    if (index < parts.length - 1) {
+                        html += '<span>•</span>';
+                    }
+                });
+                featuresContainer.innerHTML = html;
+            }
+            
+            // Change avatar for fitness scenario
+            const avatarContainer = document.getElementById('botAvatarImg');
+            if (scenarioNum === 4) {
+                avatarContainer.innerHTML = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gymBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0B9FD8;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0D5E7D;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="50" fill="url(#gymBg)"/>
+                    <circle cx="50" cy="35" r="12" fill="#FFE4C4"/>
+                    <path d="M 50 47 Q 40 50 38 65 L 38 75 Q 38 78 41 78 L 59 78 Q 62 78 62 75 L 62 65 Q 60 50 50 47 Z" fill="#1e293b"/>
+                    <circle cx="45" cy="33" r="1.5" fill="#2c3e50"/>
+                    <circle cx="55" cy="33" r="1.5" fill="#2c3e50"/>
+                    <path d="M 47 38 Q 50 40 53 38" stroke="#2c3e50" stroke-width="1" fill="none" stroke-linecap="round"/>
+                    <path d="M 35 55 L 38 60 L 35 65" stroke="#FFE4C4" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 65 55 L 62 60 L 65 65" stroke="#FFE4C4" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <rect x="44" y="70" width="3" height="8" fill="#2c3e50" rx="1"/>
+                    <rect x="53" y="70" width="3" height="8" fill="#2c3e50" rx="1"/>
+                    <path d="M 42 23 Q 44 20 46 23 L 48 26" stroke="#2c3e50" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M 58 23 Q 56 20 54 23 L 52 26" stroke="#2c3e50" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <circle cx="48" cy="85" r="4" fill="#0B9FD8" opacity="0.3"/>
+                    <circle cx="52" cy="85" r="4" fill="#0B9FD8" opacity="0.3"/>
+                </svg>`;
+            } else {
+                avatarContainer.innerHTML = '<img src="https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg" alt="AI Assistant">';
+            }
+            
+            document.getElementById('chatMessages').innerHTML = '';
+            startDemo();
+        }
+
+        function startDemo() {
+            if (isPlaying) return;
+            isPlaying = true;
+            isPaused = false;
+
+            // Update button visibility
+            document.getElementById('playButton').style.display = 'none';
+            document.getElementById('pauseButton').style.display = 'inline-block';
+
+            const conversation = scenarios[currentScenario].conversation;
+            const firstMessage = conversation[0];
+            
+            if (firstMessage.preloaded) {
+                const messagesContainer = document.getElementById('chatMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message user-message';
+
+                const messageAvatar = document.createElement('div');
+                messageAvatar.className = 'message-avatar';
+                messageAvatar.textContent = '👤';
+
+                const content = document.createElement('div');
+                content.className = 'message-content';
+                content.innerHTML = firstMessage.text.replace(/\n/g, '<br>');
+
+                messageDiv.appendChild(messageAvatar);
+                messageDiv.appendChild(content);
+                messagesContainer.appendChild(messageDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                currentIndex = 1;
+            }
+
+            playNextMessage();
+        }
+
+        function playNextMessage() {
+            if (isPaused) {
+                return;
+            }
+            
+            const conversation = scenarios[currentScenario].conversation;
+            
+            if (currentIndex >= conversation.length) {
+                isPlaying = false;
+                return;
+            }
+
+            const message = conversation[currentIndex];
+            const messagesContainer = document.getElementById('chatMessages');
+
+            currentTimeout = setTimeout(() => {
+                if (isPaused) {
+                    return;
+                }
+                typingIndicator = document.createElement('div');
+                typingIndicator.className = message.type === 'user' ? 'typing-indicator user-typing active' : 'typing-indicator bot-typing active';
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                if (message.type === 'bot') {
+                    if (currentScenario === 4 || currentScenario === 5) {
+                        avatar.innerHTML = '<img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces" alt="Customer Service" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">';
+                    } else {
+                        avatar.innerHTML = '<img src="https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg" alt="AI">';
+                    }
+                } else {
+                    avatar.textContent = '👤';
+                }
+                
+                const dots = document.createElement('div');
+                dots.className = 'typing-dots';
+                dots.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                
+                typingIndicator.appendChild(avatar);
+                typingIndicator.appendChild(dots);
+                messagesContainer.appendChild(typingIndicator);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                currentTimeout = setTimeout(() => {
+                    if (isPaused) {
+                        return;
+                    }
+                    if (typingIndicator) {
+                        typingIndicator.remove();
+                        typingIndicator = null;
+                    }
+
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${message.type}-message`;
+
+                    const messageAvatar = document.createElement('div');
+                    messageAvatar.className = 'message-avatar';
+                    if (message.type === 'bot') {
+                        if (currentScenario === 4 || currentScenario === 5) {
+                            messageAvatar.innerHTML = '<img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces" alt="Customer Service" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">';
+                        } else {
+                            messageAvatar.innerHTML = '<img src="https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg" alt="AI">';
+                        }
+                    } else {
+                        messageAvatar.textContent = '👤';
+                    }
+
+                    const content = document.createElement('div');
+                    content.className = 'message-content';
+                    content.innerHTML = message.text.replace(/\n/g, '<br>');
+
+                    if (message.photos) {
+                        const photoGrid = document.createElement('div');
+                        photoGrid.className = 'photo-grid';
+                        message.photos.forEach(photo => {
+                            photoGrid.innerHTML += `
+                                <div class="photo-item">
+                                    <img src="${photo.url}" alt="${photo.label}">
+                                    <div class="photo-label">${photo.label}</div>
+                                </div>
+                            `;
+                        });
+                        content.appendChild(photoGrid);
+                    }
+
+                    if (message.propertyCards) {
+                        message.propertyCards.forEach(card => {
+                            const cardDiv = document.createElement('div');
+                            cardDiv.className = 'property-card';
+                            cardDiv.innerHTML = `
+                                <div class="property-card-header">
+                                    <div class="property-photo">
+                                        <img src="${card.photos[0]}" alt="House">
+                                    </div>
+                                    <div class="property-photo">
+                                        <img src="${card.photos[1]}" alt="Interior">
+                                    </div>
+                                    <div class="property-details">
+                                        <strong>${card.name}</strong>
+                                        ${card.details}
+                                    </div>
+                                </div>
+                                <div class="property-links">
+                                    <div class="property-link">🔗 Virtual Tour</div>
+                                    <div class="property-link">📍 Map Location</div>
+                                </div>
+                            `;
+                            content.appendChild(cardDiv);
+                        });
+                    }
+
+                    messageDiv.appendChild(messageAvatar);
+                    messageDiv.appendChild(content);
+                    messagesContainer.appendChild(messageDiv);
+
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                    currentIndex++;
+                    playNextMessage();
+                }, 1500);
+            }, 800);
+        }
+
+        // Handle backdrop click to return to demos page
+        document.body.addEventListener('click', function(e) {
+            if (e.target === document.body) {
+                window.location.href = 'demos.html';
+            }
+        });
+
+        // Prevent clicks inside demo container from bubbling to body
+        document.addEventListener('DOMContentLoaded', function() {
+            const demoContainer = document.querySelector('.demo-container');
+            if (demoContainer) {
+                demoContainer.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check URL parameter for scenario
+            const urlParams = new URLSearchParams(window.location.search);
+            const scenarioParam = urlParams.get('scenario');
+            
+            // Show appropriate scenario buttons based on URL parameter
+            const scenario1Btn = document.getElementById('scenario1');
+            const scenario2Btn = document.getElementById('scenario2');
+            const scenario3Btn = document.getElementById('scenario3');
+            const scenario4Btn = document.getElementById('scenario4');
+            const scenario5Btn = document.getElementById('scenario5');
+            const scenario6Btn = document.getElementById('scenario6');
+            
+            if (scenarioParam === '3') {
+                // E-Commerce - show only scenario 3
+                scenario3Btn.style.display = 'inline-block';
+                scenario3Btn.classList.add('active');
+            } else if (scenarioParam === '4') {
+                // Fitness & Wellness - show only scenario 4
+                scenario4Btn.style.display = 'inline-block';
+                scenario4Btn.classList.add('active');
+            } else if (scenarioParam === '5') {
+                // Gym - show only scenario 5
+                scenario5Btn.style.display = 'inline-block';
+                scenario5Btn.classList.add('active');
+            } else if (scenarioParam === '6') {
+                // Restaurant - show only scenario 6
+                scenario6Btn.style.display = 'inline-block';
+                scenario6Btn.classList.add('active');
+            } else {
+                // Real Estate - show scenarios 1 and 2
+                scenario1Btn.style.display = 'inline-block';
+                scenario2Btn.style.display = 'inline-block';
+                scenario1Btn.classList.add('active');
+            }
+            
+            if (scenarioParam && scenarios[scenarioParam]) {
+                loadScenario(parseInt(scenarioParam));
+            } else {
+                startDemo();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/images/logo.png" alt="Novalistic.ai Logo" class="footer-logo">
+                    <p class="footer-description">Bridging the gap between evolving AI technology and modern business needs. We transform operations through intelligent automation, delivering measurable results and sustainable growth for forward-thinking companies.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/novalistic.ai/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                        <a href="https://www.facebook.com/profile.php?id=61584038775943" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+                        <a href="https://www.youtube.com/@novalisticai" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="why-choose-us.html">Why Choose Us</a></li>
+                            <li><a href="blog.html">Blog & Insights</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="documentation.html">Documentation</a></li>
+                            <li><a href="demos.html">Demo & Examples</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="index.html#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="contact.html">Help Center</a></li>
+                            <li><a href="#" style="pointer-events: none; cursor: default; color: #94a3b8;">Live Chat</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@novalistic.ai">Email: info@novalistic.ai</a></li>
+                            <li><a href="tel:+17067145143">Phone: (706) 714-5143</a></li>
+                            <li><a href="#" style="pointer-events: none; cursor: default;">Address: 5540 Centerview Dr 204, Raleigh, NC 27606</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Novalistic.ai. All rights reserved. Built with passion for innovation.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/nav-animation.js"></script>
+</body>
+</html>
+
