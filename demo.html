@@ -93,26 +93,25 @@
 
         .demo-title {
             flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .demo-title h2 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .demo-title p {
-            font-size: 12px;
-            opacity: 0.9;
-            margin-bottom: 4px;
+            margin: 0;
+            white-space: nowrap;
         }
 
         .demo-features {
-            font-size: 10px;
-            opacity: 0.8;
+            font-size: 9px;
+            opacity: 0.75;
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .demo-features span {
@@ -560,6 +559,20 @@
                 padding: 12px 20px;
             }
 
+            .demo-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .demo-title h2 {
+                font-size: 16px;
+            }
+
+            .demo-features {
+                font-size: 8px;
+            }
+
             .demo-controls {
                 padding: 10px;
                 gap: 8px;
@@ -637,7 +650,6 @@
             </div>
             <div class="demo-title">
                 <h2 id="demoTitle">Real Estate AI Assistant</h2>
-                <p id="demoSubtitle">See how our AI helps customers find their dream home</p>
                 <div class="demo-features" id="demoFeatures">
                     <span>🔍 AI Property Match</span>
                     <span>•</span>
@@ -1073,7 +1085,6 @@
             document.getElementById('scenario' + scenarioNum).classList.add('active');
             
             document.getElementById('demoTitle').textContent = scenarios[scenarioNum].title;
-            document.getElementById('demoSubtitle').textContent = scenarios[scenarioNum].subtitle;
             
             // Update demo features from scenario data
             const featuresContainer = document.getElementById('demoFeatures');
