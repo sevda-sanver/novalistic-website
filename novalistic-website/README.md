@@ -73,7 +73,7 @@ novalistic-website/
 
 ### Update Contact Information
 Edit the contact section in `index.html`:
-- Email: hello@novalistic.ai
+- Email: info@novalistic.ai
 - Phone: +1 (555) 123-4567
 - Location: San Francisco, CA
 
