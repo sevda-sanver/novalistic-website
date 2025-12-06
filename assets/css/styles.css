@@ -2815,6 +2815,34 @@ section {
         flex-wrap: wrap;
     }
     
+    /* Hero Content and Chat Bubbles */
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .hero-visual {
+        order: -1;
+        margin-top: 0;
+    }
+    
+    .chat-bubble {
+        padding: 14px 18px;
+        border-radius: 16px;
+        max-width: 85%;
+        font-size: 14px;
+    }
+    
+    .ai-bubble {
+        max-width: 88%;
+        padding: 16px 22px;
+    }
+    
+    .user-bubble {
+        max-width: 82%;
+        padding: 14px 18px;
+    }
+    
     .watch-demo-button {
         font-size: 15px;
         padding: 12px 24px;
