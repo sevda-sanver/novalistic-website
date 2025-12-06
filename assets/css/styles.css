@@ -540,17 +540,17 @@ body {
 .watch-demo-button {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 20px 42px;
-    font-size: 20px;
-    font-weight: 800;
+    gap: 10px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 700;
     color: #ffffff;
     background: linear-gradient(135deg, #0B9FD8, #0D5E7D);
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(11, 159, 216, 0.7);
+    box-shadow: 0 6px 20px rgba(11, 159, 216, 0.4);
     position: relative;
     z-index: 10;
     pointer-events: all;
@@ -560,22 +560,22 @@ body {
 .watch-demo-button::before {
     content: '';
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     background: white;
     border-radius: 50%;
     box-shadow: 
-        0 0 10px 2px rgba(255, 255, 255, 0.8),
-        20px -15px 0 0px white,
-        20px -15px 10px 2px rgba(255, 255, 255, 0.6),
-        -25px 10px 0 0px white,
-        -25px 10px 10px 2px rgba(255, 255, 255, 0.6),
-        15px 20px 0 0px white,
-        15px 20px 10px 2px rgba(255, 255, 255, 0.6),
-        -20px -20px 0 0px white,
-        -20px -20px 10px 2px rgba(255, 255, 255, 0.6),
-        30px 5px 0 0px white,
-        30px 5px 10px 2px rgba(255, 255, 255, 0.6);
+        0 0 8px 1px rgba(255, 255, 255, 0.6),
+        15px -10px 0 0px white,
+        15px -10px 8px 1px rgba(255, 255, 255, 0.5),
+        -18px 8px 0 0px white,
+        -18px 8px 8px 1px rgba(255, 255, 255, 0.5),
+        12px 15px 0 0px white,
+        12px 15px 8px 1px rgba(255, 255, 255, 0.5),
+        -15px -15px 0 0px white,
+        -15px -15px 8px 1px rgba(255, 255, 255, 0.5),
+        22px 4px 0 0px white,
+        22px 4px 8px 1px rgba(255, 255, 255, 0.5);
     animation: sparkle 2s infinite;
     pointer-events: none;
 }
@@ -586,13 +586,13 @@ body {
 }
 
 .watch-demo-button:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(11, 159, 216, 0.9);
-    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 30px rgba(11, 159, 216, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .demo-icon {
-    font-size: 26px;
+    font-size: 20px;
 }
 
 .stat h3 {
@@ -2816,14 +2816,15 @@ section {
     }
     
     .watch-demo-button {
-        font-size: 16px;
-        padding: 16px 28px;
-        width: 100%;
+        font-size: 15px;
+        padding: 12px 24px;
+        width: auto;
+        max-width: 280px;
         justify-content: center;
     }
     
     .demo-icon {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     /* Services Section */
