@@ -201,12 +201,11 @@
             <p>Let's discuss a custom solution tailored to your business needs</p>
         </div>
 
-        <form name="enterprise-plan" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="thank-you.html">
-            <input type="hidden" name="form-name" value="enterprise-plan">
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <input type="hidden" name="_subject" value="New Enterprise Plan Inquiry">
             <input type="hidden" name="plan" value="Enterprise Plan">
-            <p style="display:none;">
-                <label>Don't fill this out: <input name="bot-field" /></label>
-            </p>
+            <input type="hidden" name="_next" value="https://novalistic.ai/thank-you.html">
+            <input type="text" name="_gotcha" style="display:none">
 
             <div class="form-group">
                 <label for="name">Full Name <span>*</span></label>
